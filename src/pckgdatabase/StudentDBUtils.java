@@ -4,6 +4,7 @@ import pckgmodel.Student;
 
 import javax.xml.crypto.Data;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,7 +17,7 @@ public class StudentDBUtils {
 
     public boolean createStudent(Student student) {
         if (connection != null) {
-            String query = "INSERT INTO Student (Namel, Address,sem,roll) VALUES (?,?,?,?)";
+            String query = "INSERT INTO Student (Namel, Address,sem,roll,username,password,dob,RegisteredDate) VALUES (?,?,?,?,?,?,?,?)";
             try {
 
                 preparedStatement = connection.prepareStatement(query);
@@ -24,6 +25,11 @@ public class StudentDBUtils {
                 preparedStatement.setString(2, student.getAddress());
                 preparedStatement.setInt(3, student.getSem());
                 preparedStatement.setInt(4, student.getRoll());
+                preparedStatement.setString(5, student.getUsername());
+                preparedStatement.setString(6, student.getPassword());
+                preparedStatement.setString(7, student.getDob());
+                preparedStatement.setDate(8, student.getRegDate());
+
 
                 preparedStatement.execute();
                 connection.close();
@@ -125,7 +131,7 @@ public class StudentDBUtils {
 
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-               return true;
+                return true;
 
             }
         } catch (SQLException ex) {
