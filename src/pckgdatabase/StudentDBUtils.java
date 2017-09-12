@@ -8,12 +8,16 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class StudentDBUtils {
 
     PreparedStatement preparedStatement;
     ResultSet resultSet;
     Connection connection = DatabaseConnector.databaseConnector();
+
+    ObservableList<Student> list = FXCollections.observableArrayList();  //MAking the list of student objects
 
     public boolean createStudent(Student student) {
         if (connection != null) {
@@ -30,7 +34,6 @@ public class StudentDBUtils {
                 preparedStatement.setString(7, student.getDob());
                 preparedStatement.setDate(8, student.getRegDate());
 
-
                 preparedStatement.execute();
                 connection.close();
                 return true;
@@ -42,23 +45,30 @@ public class StudentDBUtils {
         return false;
     }
 
-    public void fetchData() {
+    public ObservableList<Student> fetchData() { // Returning the list Student object after executing SQL 
         try {
             String query = "SELECT * FROM Student";
             preparedStatement = connection.prepareStatement(query);
 
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                System.out.println("ID : " + resultSet.getInt("id"));
-                System.out.println("NAME : " + resultSet.getString("namel"));
-                System.out.println("ADDRESS : " + resultSet.getString("address"));
-                System.out.println("Semester : " + resultSet.getInt("sem"));
-                System.out.println("Roll  : " + resultSet.getInt("roll"));
+                Integer id = resultSet.getInt("id");
+                String name = resultSet.getString("namel");
+                String address = resultSet.getString("address");
+                Integer sem = resultSet.getInt("sem");
+                Integer roll = resultSet.getInt("roll");
+                String username = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                String dob = resultSet.getString("dob");
+                Date date = resultSet.getDate("RegisteredDate");
 
+                list.add(new Student(id, name, address, sem, roll, username, password, dob, date)); // Creaing student object and adding to the list
             }
+            return list;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return null;
     }
 
     public void fetchById(int id) {

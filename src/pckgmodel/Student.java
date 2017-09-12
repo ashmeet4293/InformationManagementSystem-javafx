@@ -10,7 +10,25 @@ public class Student {
     private String username;
     private String password;
     private String dob;
+     private Date regDate;
+    
+    public Student(){
+        
+    }
 
+    public Student(int id, String name, String address, int sem, int roll, String username, String password, String dob, Date regDate) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.sem = sem;
+        this.roll = roll;
+        this.username = username;
+        this.password = password;
+        this.dob = dob;
+        this.regDate = regDate;
+    }
+
+    
     
     
     public String getDob() {
@@ -29,7 +47,7 @@ public class Student {
     public void setRegDate(Date regDate) {
         this.regDate = regDate;
     }
-    private Date regDate;
+   
 
     public String getUsername() {
         return username;

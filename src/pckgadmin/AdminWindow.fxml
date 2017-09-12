@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="1289.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pckgadmin.AdminWindowController">
+<AnchorPane id="AnchorPane" prefHeight="560.0" prefWidth="1334.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pckgadmin.AdminWindowController">
    <children>
       <GridPane layoutX="27.0" layoutY="38.0" prefHeight="403.0" prefWidth="248.0">
         <columnConstraints>
@@ -76,7 +76,7 @@
             <DatePicker fx:id="dateDob" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
-      <HBox layoutX="35.0" layoutY="496.0" prefHeight="25.0" prefWidth="422.0">
+      <HBox layoutX="35.0" layoutY="496.0" prefHeight="25.0" prefWidth="495.0">
          <children>
             <Button mnemonicParsing="false" onAction="#hanldeSaveAction" prefHeight="35.0" prefWidth="94.0" text="Save">
                <HBox.margin>
@@ -98,12 +98,20 @@
                   <Insets />
                </HBox.margin>
             </Button>
+            <Button fx:id="btnLoad" mnemonicParsing="false" onAction="#handleLoadAction" prefHeight="35.0" prefWidth="91.0" text="Load">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
          </children>
          <padding>
             <Insets right="10.0" />
          </padding>
       </HBox>
-      <TableView fx:id="tableView" layoutX="470.0" layoutY="35.0" prefHeight="390.0" prefWidth="767.0">
+      <TableView fx:id="tableView" layoutX="470.0" layoutY="35.0" onKeyPressed="#handleTableKeyPressedAction" onMousePressed="#handleMousePressedAction" prefHeight="390.0" prefWidth="767.0">
         <columns>
           <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="colName" prefWidth="75.0" text="Name" />
